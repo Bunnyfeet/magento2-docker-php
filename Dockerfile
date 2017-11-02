@@ -22,6 +22,6 @@ RUN docker-php-ext-install -j$(nproc) mcrypt \
 
 COPY install-composer.sh install-composer.sh
 
-RUN apt-get install -y wget && bash install-composer.sh
+RUN apt-get install -y wget && bash install-composer.sh && mv composer.phar /usr/bin/composer
 
 VOLUME ["/var/www/html"]
