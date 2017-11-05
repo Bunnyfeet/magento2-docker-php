@@ -18,10 +18,15 @@ RUN docker-php-ext-install -j$(nproc) mcrypt \
     && docker-php-ext-install soap \
     && docker-php-ext-install xsl \
     && docker-php-ext-install zip \
-    && docker-php-ext-install mysqli
+    && docker-php-ext-install pdo pdo_mysql
 
 COPY install-composer.sh install-composer.sh
 
 RUN apt-get install -y wget && bash install-composer.sh && mv composer.phar /usr/bin/composer
+
+COPY src/CE-2.2.0 /var/www/html
+COPY auth.json /var/www/html/auth.json
+
+RUN cd /var/www/html && composer install
 
 VOLUME ["/var/www/html"]
