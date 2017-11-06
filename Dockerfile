@@ -23,6 +23,13 @@ RUN docker-php-ext-install -j$(nproc) mcrypt \
 COPY install-composer.sh install-composer.sh
 
 RUN apt-get install -y wget && bash install-composer.sh && mv composer.phar /usr/bin/composer
-RUN chown -R 33:33 /var/www/html
+
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["php-fpm", "-F"]
 
 VOLUME ["/var/www/html"]
