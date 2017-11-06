@@ -24,12 +24,4 @@ COPY install-composer.sh install-composer.sh
 
 RUN apt-get install -y wget && bash install-composer.sh && mv composer.phar /usr/bin/composer
 
-COPY src/CE-2.2.0 /var/www/html
-COPY auth.json* /var/www/html/
-
-ARG COMPOSER_AUTH=${COMPOSER_AUTH}
-ENV COMPOSER_AUTH=$COMPOSER_AUTH
-
-RUN cd /var/www/html && composer install
-
 VOLUME ["/var/www/html"]
