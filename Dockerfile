@@ -24,6 +24,6 @@ RUN apt-get install -y wget && bash install-composer.sh && mv composer.phar /usr
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN ["chown", "-R", "www-data:www-data", "/var/www/html"]
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"] 
 
 VOLUME ["/var/www/html"]
