@@ -21,6 +21,7 @@ RUN docker-php-ext-install -j$(nproc) mcrypt \
     && docker-php-ext-install pdo pdo_mysql
 COPY install-composer.sh install-composer.sh
 RUN apt-get install -y wget && bash install-composer.sh && mv composer.phar /usr/bin/composer
+RUN apt-get install -y htop nano sudo
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN ["chown", "-R", "www-data:www-data", "/var/www/html"]
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
